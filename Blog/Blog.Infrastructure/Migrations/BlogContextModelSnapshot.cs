@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Blog.Infrastructure.Migrations
 {
-    [DbContext(typeof(BlogContext))]
+    [DbContext(typeof(BlogDBContext))]
     partial class BlogContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -21,7 +21,27 @@ namespace Blog.Infrastructure.Migrations
                 .HasAnnotation("Proxies:CheckEquality", false)
                 .HasAnnotation("Proxies:LazyLoading", true);
 
-            modelBuilder.Entity("Blog.Domain.Models.BlogPost", b =>
+            modelBuilder.Entity("Blog.Domain.Models.Comment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("PostId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PostId");
+
+                    b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("Blog.Domain.Models.Post", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -37,41 +57,21 @@ namespace Blog.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("BlogPosts");
+                    b.ToTable("Posts");
                 });
 
             modelBuilder.Entity("Blog.Domain.Models.Comment", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("BlogPostId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BlogPostId");
-
-                    b.ToTable("Comments");
-                });
-
-            modelBuilder.Entity("Blog.Domain.Models.Comment", b =>
-                {
-                    b.HasOne("Blog.Domain.Models.BlogPost", "BlogPost")
+                    b.HasOne("Blog.Domain.Models.Post", "Post")
                         .WithMany("Comments")
-                        .HasForeignKey("BlogPostId")
+                        .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("BlogPost");
+                    b.Navigation("Post");
                 });
 
-            modelBuilder.Entity("Blog.Domain.Models.BlogPost", b =>
+            modelBuilder.Entity("Blog.Domain.Models.Post", b =>
                 {
                     b.Navigation("Comments");
                 });

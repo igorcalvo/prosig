@@ -2,7 +2,7 @@
 
 namespace Blog.Domain.Models
 {
-    public  class BlogPost : BaseModel
+    public  class Post : BaseModel
     {
         [Required]
         public required string Title { get; set; }

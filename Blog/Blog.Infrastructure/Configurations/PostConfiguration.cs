@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Blog.Infrastructure.Configurations
 {
-    public class BlogPostConfiguration : IEntityTypeConfiguration<BlogPost>
+    public class PostConfiguration : IEntityTypeConfiguration<Post>
     {
-        public void Configure(EntityTypeBuilder<BlogPost> builder)
+        public void Configure(EntityTypeBuilder<Post> builder)
         {
             builder.HasMany(b => b.Comments)
-                   .WithOne(c => c.BlogPost)
-                   .HasForeignKey(c => c.BlogPostId)
+                   .WithOne(c => c.Post)
+                   .HasForeignKey(c => c.PostId)
                    .OnDelete(DeleteBehavior.Cascade);
         }
     }

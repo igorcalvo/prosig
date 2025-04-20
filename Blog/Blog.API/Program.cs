@@ -5,8 +5,8 @@ using System;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<BlogContext>(options =>
-    options.UseSqlite("Data Source=blog.db")
+builder.Services.AddDbContext<BlogDBContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("Default"))
            .UseLazyLoadingProxies()
     );
 

@@ -4,16 +4,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Infrastructure
 {
-    public class BlogContext : DbContext
+    public class BlogDBContext : DbContext
     {
-        public DbSet<BlogPost> BlogPosts => Set<BlogPost>();
+        public DbSet<Post> Posts => Set<Post>();
         public DbSet<Comment> Comments => Set<Comment>();
 
-        public BlogContext(DbContextOptions<BlogContext> options) : base(options) { }
+        public BlogDBContext(DbContextOptions<BlogDBContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new BlogPostConfiguration());
+            modelBuilder.ApplyConfiguration(new PostConfiguration());
         }
     }
 }
