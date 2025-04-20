@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Blog.Core.Interfaces
+﻿namespace Blog.Core.Interfaces
 {
-    internal interface ICommentService
+    public interface ICommentService
     {
     }
 }

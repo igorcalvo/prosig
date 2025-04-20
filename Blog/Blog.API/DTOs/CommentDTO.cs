@@ -1,4 +1,4 @@
-﻿namespace Blog.Domain.DTOs
+﻿namespace Blog.API.DTOs
 {
     public class CommentDTO
     {

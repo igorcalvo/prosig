@@ -1,9 +1,10 @@
-﻿using Blog.Infrastructure.Interfaces;
+﻿using Blog.Domain.Models;
+using Blog.Infrastructure.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Infrastructure.Repositories
 {
-    public class BaseRepository<T> : IRepository<T> where T : class
+    public class BaseRepository<T> : IRepository<T> where T : BaseModel
     {
         private readonly BlogDBContext _context;
         private readonly DbSet<T> _dbSet;
@@ -25,6 +26,7 @@ namespace Blog.Infrastructure.Repositories
 
         public async Task AddAsync(T entity)
         {
+            entity.Id = Guid.NewGuid();
             await _dbSet.AddAsync(entity);
             await _context.SaveChangesAsync();
         }

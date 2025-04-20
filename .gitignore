@@ -6,3 +6,6 @@ Debug/
 /build/
 *.suo
 *.user
+blog.db
+*.db-wal
+*.db-shm

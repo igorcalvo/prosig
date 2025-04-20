@@ -9,7 +9,9 @@ namespace Blog.API.Mappings
         public CommentProfile()
         {
             CreateMap<CommentDTO, Comment>();
-            CreateMap<Comment, CommentDTO>();
+
+            CreateMap<Comment, CommentDTO>()
+                .ForMember(dest => dest.PostId, opt => opt.MapFrom(src => src.PostId));
         }
     }
 }

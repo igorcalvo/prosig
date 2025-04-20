@@ -9,7 +9,9 @@ namespace Blog.API.Mappings
         public PostProfile()
         {
             CreateMap<PostDTO, Post>();
-            CreateMap<Post, PostDTO>();
+
+            CreateMap<Post, PostDTO>()
+                .ForMember(dest => dest.Comments, opt => opt.MapFrom(src => src.Comments));
         }
     }
 }

@@ -2,12 +2,6 @@
 using Blog.Domain.Models;
 using Blog.Infrastructure.Interfaces;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Blog.Core.Services
 {
@@ -24,9 +18,23 @@ namespace Blog.Core.Services
             _postRepository = postRepository;
         }
 
-        public void CreateNew(Post post)
+        public async Task<int> AddComment(Guid id, Comment comment)
         {
+            var post = await _postRepository.GetByIdAsync(id);
+            if (post == null) throw new ArgumentOutOfRangeException($"Couldn't find post with id: {id}");
 
+            post.Comments.Add(comment);
+            await _postRepository.UpdateAsync(post);
+
+            return post.Comments.Count();
+        }
+
+        public async Task<Guid> Create(Post post)
+        {
+            if (post.Id != Guid.Empty) throw new ArgumentOutOfRangeException("Post must be created with an empty Id");
+
+            await _postRepository.AddAsync(post);
+            return post.Id;
         }
     }
 }
