@@ -65,6 +65,7 @@ namespace Blog.API.Controllers
         public async Task<IActionResult> Add(Guid id, [FromBody] CommentDTO comment)
         {
             if (id == Guid.Empty) return BadRequest("id is Required");
+            comment.PostId = id;
             var commentModel = _mapper.Map<Comment>(comment);
 
             int commentCount = await _postService.AddComment(id, commentModel);

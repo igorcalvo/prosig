@@ -34,6 +34,7 @@ namespace Blog.Core.Services
             if (post.Id != Guid.Empty) throw new ArgumentOutOfRangeException("Post must be created with an empty Id");
 
             await _postRepository.AddAsync(post);
+
             return post.Id;
         }
     }
