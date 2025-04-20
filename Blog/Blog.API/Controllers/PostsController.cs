@@ -1,4 +1,4 @@
-﻿using Blog.Domain.Models;
+﻿using Blog.Domain.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blog.API.Controllers
@@ -22,7 +22,7 @@ namespace Blog.API.Controllers
 
         [HttpPost]
         [Route("")]
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create([FromBody] PostDTO post)
         {
             throw new NotImplementedException();
             return Ok();
@@ -38,7 +38,15 @@ namespace Blog.API.Controllers
 
         [HttpPost]
         [Route("{id}/comments")]
-        public async Task<IActionResult> GetById(Guid id, [FromBody] Comment comment)
+        public async Task<IActionResult> Add(Guid id, [FromBody] CommentDTO comment)
+        {
+            throw new NotImplementedException();
+            return Ok();
+        }
+
+        [HttpPut]
+        [Route("")]
+        public async Task<IActionResult> Edit(PostDTO post)
         {
             throw new NotImplementedException();
             return Ok();
